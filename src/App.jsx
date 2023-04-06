@@ -12,7 +12,6 @@ const CryptoCurrency = () => {
         JSON.stringify({
           method: "SUBSCRIBE",
           params: ["!ticker@arr"],
-          id: 1,
         })
       );
     });
@@ -38,17 +37,25 @@ const CryptoCurrency = () => {
   }, []);
 
   return (
-    <div>
-      {currencyData ? (
-        <div>
-          <p>Symbol: {currencyData.s}</p>
-          <p>Price Change Percent: {currencyData.P}</p>
-          <p>Last Price: {currencyData.c}</p>
+    <>
+      <div className="flex items-center justify-center min-h-screen bg-slate-100 py-5">
+        <div className="bg-slate-800 w-3/4 lg:w-1/4 md:w-2/4 h-fit rounded-md text-slate-50 py-3">
+          {currencyData ? (
+            <section className="flex justify-between px-5 py-3 items-center">
+              <div className="font-bold">{currencyData.s}</div>
+              <div className="flex flex-col">
+                <strong>{currencyData.P}</strong>
+                <small>{currencyData.c}</small>
+              </div>
+            </section>
+          ) : (
+            <div className="text-center py-5">
+              <p> Loading currency data...</p>
+            </div>
+          )}
         </div>
-      ) : (
-        <p>Loading currency data...</p>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 
